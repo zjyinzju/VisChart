@@ -1,4 +1,7 @@
-本项目仅限用于2024年浙江大学暑期学校课程项目模板。
+本项目来自于2024短学期“大数据可视化”的Project2
+
+React框架和模板采用[2024年浙江大学暑期学校课程项目模板](https://github.com/susicaliu/ZJU_SummerSchool_ProjectTemplate)。
+
 
 ## 如何启动本项目
 
