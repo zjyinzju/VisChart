@@ -1,5 +1,6 @@
 // 本文件是界面UI的根目录
 
+// App.js -> index.js -> public/index.html(id 为 root的 div)
 import React from 'react';
 
 import AssistView from './AssistView';
@@ -12,16 +13,19 @@ import '../css/App.css'
 function App() {
 
     return <div className='root'>
+      <div className='topRow'>
         <div className='controlPanel'>
           <ControlPanel/>
         </div>
         <div className='mainPanel'>
           <div className='overview'><Overview/></div>
-          <div className='otherview'>
+        </div>
+      </div>
+      <div className='otherview'>
             <div className='assistView'><AssistView/></div>
             <div className='detailView'><DetailView/></div>
-          </div>
-        </div>
+            <div className='degreeView'></div>
+      </div>
     </div>;
 }
 

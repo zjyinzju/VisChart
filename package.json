@@ -5,7 +5,7 @@
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@uiw/react-baidu-map": "^2.7.2",
-    "antd": "^5.19.1",
+    "antd": "^5.19.3",
     "cra-template": "1.2.0",
     "echarts-for-react": "^3.0.2",
     "papaparse": "^5.4.1",

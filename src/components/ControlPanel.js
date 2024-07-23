@@ -1,32 +1,39 @@
-import React, {useContext} from 'react';
-import {Select} from 'antd';
+import React, { useContext } from 'react';
+import { Button } from 'antd';  // 这里使用Ant Design的按钮组件
 
-import {store} from '../store';
-import '../css/ControlPanel.css'
+import { store } from '../store';
+import '../css/ControlPanel.css';
 
 function ControlPanel() {
-    const {state, dispatch} = useContext(store);
+  const { state, dispatch } = useContext(store);
 
-    const onChange = (value)=>{
-        // 可以在F12调试窗口中通过console.log查看信息进行Debug
-        console.log(value);
-        dispatch({
-            type: 'changeOption',
-            payload: value
-        });
-    };
+  const handleClick = (value) => {
+    console.log(value);
+    dispatch({
+      type: 'changeOption',
+      payload: value
+    });
+  };
 
-    return <div>
-        <p>Control Panel</p>
-        <p>{state.count}</p>
-        <button onClick={() => dispatch({type: 'increment'})}>add</button>
-        <p></p>
-        <Select onChange={onChange} defaultValue='default'>
-            <Select.Option value='default'>Default</Select.Option>
-            <Select.Option value='A'>Dataset A</Select.Option>
-            <Select.Option value='B'>Dataset B</Select.Option>
-        </Select>
+  return (
+    <div className="control-panel">
+      <p>选择数据</p>
+      <div className="button-group">
+        <Button onClick={() => handleClick('A')} type="primary" block>Dataset A</Button>
+        <Button onClick={() => handleClick('B')} type="default" block>Dataset B</Button>
+      </div>
+      <br/>
+      <p>选择图表类型</p>
+        <div className="button-group">
+            <Button onClick={() => handleClick('line')} type="primary" block>Line</Button>
+            <Button onClick={() => handleClick('bar')} type="default" block>Bar</Button>
+            <Button onClick={() => handleClick('pie')} type="default" block>Pie</Button>
+            <Button onClick={() => handleClick('scatter')} type="default" block>Scatter</Button>
+            <Button onClick={() => handleClick('heatmap')} type="default" block>heatmap</Button>
+        </div>  
     </div>
+  );
 }
 
 export default ControlPanel;
+

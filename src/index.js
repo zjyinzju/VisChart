@@ -1,8 +1,10 @@
 // 这是React的入口
 
+// React 的两个核心包
 import React from 'react';
 import {createRoot} from 'react-dom/client';
 import './index.css';
+// 导入项目的根组件
 import App from './components/App';
 import {StateProvider} from "./store";
 

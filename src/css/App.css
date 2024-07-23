@@ -1,26 +1,76 @@
-.root {
-  width: 100%;
-  height: 80vh;
-  display: flex;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.controlPanel{
-  width: 10%;
-}
-.mainPanel{
-  width: 90%;
+html, body {
   height: 100%;
+  margin: 0;
 }
-.overview{
-  height: 50%;
-}
-.otherview{
-  height: 50%;
+
+.root {
+  width: 100%;
+  height: 95vh;
   display: flex;
+  flex-direction: column;
+  gap: 1%;
 }
-.detailView{
-  width: 50%;
+
+/*top row*/
+.topRow {
+  display: flex;
+  flex: 0 1 65%; /* 占据70%的高度 */
+  gap: 1%; /* 设置间距 */
 }
-.assistView{
-  width: 50%;
+
+/* nav */
+.controlPanel {
+  flex: 0 0 15%; /* 设置固定宽度为20% */
+  background-color: #f0f2f5;
+  padding: 16px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
+
+/* main(与nav分占左右) */
+.mainPanel {
+  flex: 1; /* 自适应剩余宽度 */
+  background-color: #f0f2f5;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+/* 折线图 */
+.overview {
+  font-weight: 600;
+  flex: 1; /* 自适应高度 */
+  align-self: stretch;
+  margin: 0 1%; /* 设置边距 */
+  margin-top: 10%;
+}
+
+/*bottom row*/
+.otherview {
+  flex: 1; /* 占据剩余高度 */
+  display: flex;
+  gap: 1%;
+  padding: 1%;
+}
+
+/* coral-reef & pie & degree*/
+.assistView, .detailView, .degreeView {
+  flex: 1; /* 平均分配宽度 */
+  background-color: #f0f2f5;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+
+
+
