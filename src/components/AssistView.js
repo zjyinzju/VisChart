@@ -44,7 +44,7 @@ function AssistView() {
             },
             yAxis: {
                 type: 'value',
-                min: 8,
+                min: 5,
                 max: 35,
             },
             series: [
@@ -58,7 +58,7 @@ function AssistView() {
     };
 
     return <div>
-        <p>hard coral cover percent</p>
+        <p>Algae Cover percent</p>
         <ReactEcharts option={getOption()} />
     </div>
 }
