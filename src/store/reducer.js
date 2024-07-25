@@ -1,35 +1,27 @@
 
 // 不同请求的处理
-const reducer = (state, action) => {
-    switch (action.type) {
-        case 'increment':
-            return {
-                ...state,
-                count: state.count + 1
-            };
-        case 'decrease':
-            return {
-                ...state,
-                count: state.count - 1
-            };
-        case 'changeOption':
-            return {
-                ...state,
-                changeOption: action.payload
-            };
-        case 'init': {
-            let newData = [];
-            // TODO: use action.payload to update newData
-            console.log(action.payload);
-            newData = action.payload;
-            return {
-                ...state,
-                data: newData
-            };
-        }
-        default:
-            throw new Error();
-    }
+// reducer.js
+
+// reducer.js
+
+const initialState = {
+  category: 'seaSurface',
+  // 其他状态
+};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'SET_CATEGORY':
+      return {
+        ...state,
+        category: action.payload,
+      };
+    // 其他处理
+    default:
+      return state;
+  }
 }
+
+export { initialState, reducer };
 
 export default reducer;
