@@ -176,6 +176,8 @@ const DetailView = () => {
 
   return (
     <div>
+      <center><h2>Coral Bleaching Percent</h2></center>
+      
       <div ref={chartRef} style={{ width: '100%', height: '440px' }}></div>
     </div>
   );
