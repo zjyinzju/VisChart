@@ -15,7 +15,8 @@ function ControlPanel() {
 
   return (
     <div className="control-panel">
-      <p>选择数据</p>
+      <h1>选择数据</h1>
+      <br/>
       <div className="button-group">
         <Button 
           onClick={() => handleClick('seaSurface')} 

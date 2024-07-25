@@ -1,15 +1,15 @@
 
 /* ControlPanel.css */
 
-/* ControlPanel.css */
-
 .control-panel p {
-  margin: 0;
+  margin: 5;
 }
 
 .button-group {
   display: flex;
   flex-wrap: wrap; /* 允许换行 */
+  justify-content: center; /* 设置按钮水平居中 */
+  align-items: center; /* 设置按钮垂直居中 */
   gap: 8px; /* 设置按钮之间的间距 */
 }
 

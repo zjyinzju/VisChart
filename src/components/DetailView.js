@@ -176,122 +176,13 @@ const DetailView = () => {
 
   return (
     <div>
-      <div ref={chartRef} style={{ width: '100%', height: '500px' }}></div>
+      <div ref={chartRef} style={{ width: '100%', height: '440px' }}></div>
     </div>
   );
 };
 
 export default DetailView;
 
-
-
-
-/*import React, { useState, useEffect } from 'react';
-import Papa from 'papaparse';
-import ReactEcharts from 'echarts-for-react';
-
-const DetailView = () => {
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const filePath = `${process.env.PUBLIC_URL}/data/combined.csv`;
-      const response = await fetch(filePath);
-      const reader = response.body.getReader();
-      const result = await reader.read();
-      const decoder = new TextDecoder('utf-8');
-      const csvData = decoder.decode(result.value);
-
-      const parsedData = Papa.parse(csvData, { header: true }).data;
-
-      const allData = parsedData
-        .filter(item => item.cover) // 移除cover为空的行
-        .map(item => ({
-          year: parseInt(item.year),
-          oceanName: item.oceanName,
-          cover: parseFloat(item.cover)
-        }));
-
-      setData(allData);
-    };
-
-    fetchData();
-  }, []);
-
-  const getOption = () => {
-    if (data.length === 0) {
-      return {}; // 如果没有数据，返回一个空对象
-    }
-
-    const years = Array.from(new Set(data.map(item => item.year))).sort((a, b) => a - b);
-    const oceanNames = Array.from(new Set(data.map(item => item.oceanName)));
-
-    const colorPalette = [
-      '#c23531', '#2f4554', '#61a0a8', '#d48265', '#91c7ae',
-      '#749f83', '#ca8622', '#bda29a', '#6e7074', '#546570',
-      '#c4ccd3'
-    ];
-
-    return {
-      title: {
-        text: 'Coral Reef Cover',
-      },
-      tooltip: {
-        trigger: 'item',
-        showDelay: 0,
-        axisPointer: {
-          type: 'cross',
-          lineStyle: {
-            type: 'dashed',
-            width: 1
-          }
-        },
-        formatter: function (params) {
-          return `Year: ${params.value[0]}<br/>Ocean: ${params.seriesName}<br/>Cover: ${params.value[1]}%`;
-        },
-        zlevel: 1
-      },
-      legend: {
-        data: oceanNames,
-        top: '5%',
-        right: '5%'
-      },
-      xAxis: {
-        type: 'category',
-        name: 'Year',
-        data: years,
-        scale: true,
-        axisLabel: {
-          formatter: (value) => value.toString()
-        }
-      },
-      yAxis: {
-        type: 'value',
-        name: 'Coral Reef Cover (%)',
-        scale: true,
-        axisLabel: {
-          formatter: (value) => `${value}%`
-        }
-      },
-      series: oceanNames.map((name, index) => ({
-        name: name,
-        type: 'scatter',
-        data: data.filter(d => d.oceanName === name).map(d => [d.year, d.cover]),
-        itemStyle: {
-          color: colorPalette[index % colorPalette.length]
-        }
-      }))
-    };
-  };
-
-  return (
-    <div>
-      <ReactEcharts option={getOption()} style={{ height: '400px', width: '100%' }} />
-    </div>
-  );
-};
-
-export default DetailView;*/
 
 
 

@@ -74,7 +74,8 @@ function Overview() {
 
     return (
         <div>
-            <h1>Average temperature</h1>
+            <center>
+            <h2>Average temperature</h2>
             <br/>
             <Slider
                 range
@@ -95,6 +96,7 @@ function Overview() {
                 marks={{ 15.5: '15.5', 21: '21' }}
             />
             <ReactEcharts option={option} />
+             </center>
         </div>
     );
 }

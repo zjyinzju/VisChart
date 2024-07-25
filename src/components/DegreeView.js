@@ -68,7 +68,7 @@ function DegreeView() {
 
     return <div>
         <center>
-        <p>Elnino related temperature Data</p>
+        <h2>Elnino related temperature Data</h2>
         </center>
         <ReactEcharts option={getOption()} />
     </div>
