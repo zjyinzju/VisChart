@@ -33,7 +33,9 @@ function AssistView() {
     };
 
     return <div>
-        <p>Algae Cover percent</p>
+        <center>
+        <p>Algae Cover Percent</p>
+        </center>
         <ReactEcharts option={getOption()} />
     </div>
 }
