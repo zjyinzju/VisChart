@@ -1,6 +1,7 @@
 import * as echarts from 'echarts';
 import { useEffect, useRef, useState } from 'react';
 import Papa from 'papaparse';
+import { Slider } from 'antd';
 
 const csvData = `year,oceanName,averageBleaching
 1990,Red Sea,0.75
@@ -136,48 +137,13 @@ const parseCSV = (data) => {
 
 const DetailView = () => {
   const [data, setData] = useState({});
+  const [yearRange, setYearRange] = useState([1990, 2020]);
   const chartRef = useRef(null);
 
   useEffect(() => {
     parseCSV(csvData)
       .then((parsedData) => {
-        // Filter data for years between 1990 and 2020
-        const filteredData = parsedData.filter(item => item.year >= 1990 && item.year <= 2020);
-
-        const years = [...new Set(filteredData.map(item => item.year))];
-        const oceanNames = [...new Set(filteredData.map(item => item.oceanName))];
-
-        const series = oceanNames.map(ocean => ({
-          name: ocean,
-          type: 'scatter',
-          data: years.map(year => {
-            const entry = filteredData.find(d => d.year === year && d.oceanName === ocean);
-            return entry ? [year, entry.averageBleaching] : [year, 0];
-          }),
-          symbolSize: 10,
-        }));
-
-        setData({
-          tooltip: {
-            trigger: 'item',
-          },
-          legend: {
-            data: oceanNames,  // Legend items based on ocean names
-            orient: 'horizontal',
-            left: 'center',
-          },
-          xAxis: {
-            type: 'value',
-            name: 'Year',
-            min: 1990,
-            max: 2020,
-          },
-          yAxis: {
-            type: 'value',
-            name: 'Average Bleaching',
-          },
-          series: series,
-        });
+        setData(parsedData);
       })
       .catch((error) => {
         console.error('Error parsing CSV:', error);
@@ -185,26 +151,72 @@ const DetailView = () => {
   }, []);
 
   useEffect(() => {
-    if (chartRef.current && data.series) {
-      const chartInstance = echarts.init(chartRef.current);
-      chartInstance.setOption(data);
-      return () => {
-        chartInstance.dispose();
+    if (data.length > 0) {
+      const filteredData = data.filter(item => item.year >= yearRange[0] && item.year <= yearRange[1]);
+
+      const years = [...new Set(filteredData.map(item => item.year))];
+      const oceanNames = [...new Set(filteredData.map(item => item.oceanName))];
+
+      const series = oceanNames.map(ocean => ({
+        name: ocean,
+        type: 'scatter',
+        data: years.map(year => {
+          const entry = filteredData.find(d => d.year === year && d.oceanName === ocean);
+          return entry ? [year, entry.averageBleaching] : [year, 0];
+        }),
+        symbolSize: 10,
+      }));
+
+      const option = {
+        tooltip: {
+          trigger: 'item',
+        },
+        legend: {
+          data: oceanNames,  // Legend items based on ocean names
+          orient: 'horizontal',
+          left: 'center',
+        },
+        xAxis: {
+          type: 'value',
+          name: 'Year',
+          min: 1990,
+          max: 2020,
+        },
+        yAxis: {
+          type: 'value',
+          name: 'Average Bleaching',
+        },
+        series: series,
       };
+
+      if (chartRef.current) {
+        const chartInstance = echarts.init(chartRef.current);
+        chartInstance.setOption(option);
+        return () => {
+          chartInstance.dispose();
+        };
+      }
     }
-  }, [data]);
+  }, [data, yearRange]);
+
+  const onSliderChange = (value) => {
+    setYearRange(value);
+  };
 
   return (
     <div>
       <center><h2>Coral Bleaching Percent</h2></center>
+      <Slider
+        range
+        min={1990}
+        max={2020}
+        defaultValue={[1990, 2020]}
+        onChange={onSliderChange}
+        tooltip={{ formatter: value => `${value}` }}
+      />
       <div ref={chartRef} style={{ width: '100%', height: '440px' }}></div>
     </div>
   );
 };
 
 export default DetailView;
-
-
-
-
-
