@@ -69,7 +69,9 @@ function Overview() {
     }, [year, getOption]);
 
     return <div>
+        <center>
         <p>Sea Surface Temperature</p>
+        </center>
         <Slider
             range
             step={1}

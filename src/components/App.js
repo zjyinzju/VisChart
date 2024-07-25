@@ -7,6 +7,7 @@ import AssistView from './AssistView';
 import ControlPanel from './ControlPanel';
 import Overview from './Overview';
 import DetailView from './DetailView';
+import DegreeView from './DegreeView';
 import '../css/App.css'
 
 // App组件
@@ -24,7 +25,7 @@ function App() {
       <div className='otherview'>
             <div className='assistView'><AssistView/></div>
             <div className='detailView'><DetailView/></div>
-            <div className='degreeView'></div>
+            <div className='degreeView'><DegreeView/></div>
       </div>
     </div>;
 }
