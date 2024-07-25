@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
-import { Button } from 'antd';  // 这里使用Ant Design的按钮组件
-
+import { Button } from 'antd';
 import { store } from '../store';
 import '../css/ControlPanel.css';
 
@@ -8,9 +7,8 @@ function ControlPanel() {
   const { state, dispatch } = useContext(store);
 
   const handleClick = (value) => {
-    console.log(value);
     dispatch({
-      type: 'changeOption',
+      type: 'SET_CATEGORY',  // 使用一个明确的动作类型
       payload: value
     });
   };
@@ -19,21 +17,23 @@ function ControlPanel() {
     <div className="control-panel">
       <p>选择数据</p>
       <div className="button-group">
-        <Button onClick={() => handleClick('A')} type="primary" block>Dataset A</Button>
-        <Button onClick={() => handleClick('B')} type="default" block>Dataset B</Button>
+        <Button 
+          onClick={() => handleClick('seaSurface')} 
+          type={state.category === 'seaSurface' ? "primary" : "default"} 
+          block
+        >
+          Sea Surface 
+        </Button>
+        <Button 
+          onClick={() => handleClick('land')} 
+          type={state.category === 'land' ? "primary" : "default"} 
+          block
+        >
+          Land
+        </Button>
       </div>
-      <br/>
-      <p>选择图表类型</p>
-        <div className="button-group">
-            <Button onClick={() => handleClick('line')} type="primary" block>Line</Button>
-            <Button onClick={() => handleClick('bar')} type="default" block>Bar</Button>
-            <Button onClick={() => handleClick('pie')} type="default" block>Pie</Button>
-            <Button onClick={() => handleClick('scatter')} type="default" block>Scatter</Button>
-            <Button onClick={() => handleClick('heatmap')} type="default" block>heatmap</Button>
-        </div>  
     </div>
   );
 }
 
 export default ControlPanel;
-

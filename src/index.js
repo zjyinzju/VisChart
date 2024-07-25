@@ -8,6 +8,10 @@ import './index.css';
 import App from './components/App';
 import {StateProvider} from "./store";
 
+import ReactDOM from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+
+
 /*
 root.render(element), 这个函数是在container里渲染element。
 大家可以看到，public/index.html文件中，body标签里只有一个id为root的div标签。这里选取它作为container。

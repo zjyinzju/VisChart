@@ -23,5 +23,12 @@
   font-size: 15px; /* 设置字体大小 */
 }
 
+.control-panel a {
+  color: #1890ff; /* 设置链接颜色 */
+}
+
+.control-panel a:hover {
+  color: #40a9ff; /* 设置链接悬停颜色 */
+}
 
 

@@ -25,7 +25,7 @@ function App() {
             <div className='assistView'><AssistView/></div>
             <div className='detailView'><DetailView/></div>
             <div className='degreeView'></div>
-      </div>
+      </div> 
     </div>;
 }
 
