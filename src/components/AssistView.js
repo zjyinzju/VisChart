@@ -4,14 +4,20 @@ import React from 'react';
 import ReactEcharts from 'echarts-for-react';
 
 import {store} from '../store';
+import { reducer } from '@uiw/react-baidu-map';
 
 function AssistView() {
     //const {state, dispatch} = useContext(store);
 
+    
+    
     const getOption = () => {
         return {
             tooltip: {
                 trigger: 'axis'
+            },
+            legend: {
+                data: ['aglae']
             },
             xAxis: {
                 type: 'category',
@@ -28,6 +34,40 @@ function AssistView() {
                     data: [8.86371,9.98266,9.94538,8.96118,17.34844,6.55469,26.05032,25.45932,26.07645,28.40754,28.37462,29.08378,27.33401,30.72729,32.67262,34.15331,32.10791,33.89333,28.85041,31.06354,31.98302,33.47178],
                     type: 'line',
                 },
+                {
+                    name: 'Sudden heat',
+                    type: 'line',
+                    markLine: {
+                        itemStyle: { 
+                            normal: {
+                                color: 'red',
+                                label:{
+                                    formatter: 'Sudden heat'
+                                }
+                            }
+                        },
+                        //name: '预警时间',
+                        //yAxisIndex: 0,
+                        symbol:'none',//去掉箭头
+                        data: [[
+                            {coord: ['2001', 5] },
+                            {coord: ['2001', 35] }
+                        ],[
+                            {coord: ['2009', 5] },
+                            {coord: ['2009', 35] }
+                        ],[
+                            {coord: ['2014', 5] },
+                            {coord: ['2014', 35] }
+                        ],[
+                            {coord: ['2015', 5] },
+                            {coord: ['2015', 35] }
+                        ],[
+                            {coord: ['2019', 5] },
+                            {coord: ['2019', 35] }
+                        ]
+                        ]
+                    }
+                }
             ]
         };
     };
