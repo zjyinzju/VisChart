@@ -2,104 +2,124 @@ import * as echarts from 'echarts';
 import { useEffect, useRef, useState } from 'react';
 import Papa from 'papaparse';
 
-const csvData = `year,oceanName,cover
-2000,Arabian Gulf,60.16666666666666
-2000,Atlantic,1.956704761904762
-2000,Indian,3.27
-2000,Pacific,52.8448275862069
-2001,Arabian Gulf,
-2001,Atlantic,0.8128593272171254
-2001,Indian,27.718888888888888
-2001,Pacific,27.270491803278688
-2002,Arabian Gulf,75.0
-2002,Atlantic,2.917007672634271
-2002,Indian,27.48846153846154
-2002,Pacific,26.479859649122808
-2003,Arabian Gulf,0.9375
-2003,Atlantic,2.557450980392157
-2003,Indian,13.766355140186915
-2003,Pacific,1.1895
-2003,Red Sea,0.03125
-2004,Arabian Gulf,1.8333333333333333
-2004,Atlantic,6.844227642276423
-2004,Indian,6.891
-2004,Pacific,1.5823800383877158
-2004,Red Sea,0.0333333333333333
-2005,Atlantic,34.631884315117105
-2005,Indian,7.31288256227758
-2005,Pacific,1.4223284313725488
-2005,Red Sea,0.0985915492957746
-2006,Arabian Gulf,0.375
-2006,Atlantic,18.94637614678899
-2006,Indian,1.306315789473684
-2006,Pacific,1.798636763412489
-2006,Red Sea,0.4166666666666667
-2007,Arabian Gulf,33.412
-2007,Atlantic,7.471711999999999
-2007,Indian,3.4209166666666664
-2007,Pacific,4.146044386422976
-2007,Red Sea,0.0
-2008,Atlantic,4.641419558359622
-2008,Indian,0.6938461538461539
-2008,Pacific,3.4319172932330826
-2008,Red Sea,0.4528260869565217
-2009,Arabian Gulf,1.3502777777777777
-2009,Atlantic,8.801771159874608
-2009,Indian,3.490891089108911
-2009,Pacific,4.086031128404669
-2009,Red Sea,0.6623931623931624
-2010,Arabian Gulf,2.032
-2010,Atlantic,7.98693446088795
-2010,Indian,25.716545454545457
-2010,Pacific,7.679956474428727
-2010,Red Sea,1.5416666666666667
-2011,Arabian Gulf,5.9375
-2011,Atlantic,9.159064885496184
-2011,Indian,0.4439655172413793
-2011,Pacific,1.320844155844156
-2011,Red Sea,0.0
-2012,Arabian Gulf,0.2083333333333333
-2012,Atlantic,3.857421524663677
-2012,Indian,0.4330985915492957
-2012,Pacific,0.7279005524861878
-2012,Red Sea,0.9242424242424242
-2013,Arabian Gulf,0.5789473684210527
-2013,Atlantic,3.674175084175084
-2013,Indian,0.7044
-2013,Pacific,4.223700934579439
-2013,Red Sea,0.0
-2014,Arabian Gulf,0.0
-2014,Atlantic,21.44831978319783
-2014,Indian,0.6524390243902439
-2014,Pacific,3.338584474885845
-2014,Red Sea,0.6764705882352942
-2015,Arabian Gulf,0.0625
-2015,Atlantic,19.14078260869565
-2015,Indian,1.0726027397260274
-2015,Pacific,2.612526539278132
-2015,Red Sea,0.025
-2016,Arabian Gulf,0.4705882352941176
-2016,Atlantic,7.815648148148148
-2016,Indian,47.93887550200804
-2016,Pacific,10.86804384485666
-2016,Red Sea,4.444444444444445
-2017,Arabian Gulf,1.09375
-2017,Atlantic,2.454439461883408
-2017,Indian,1.1838235294117647
-2017,Pacific,3.016156462585034
-2017,Red Sea,0.0
-2018,Atlantic,1.565868263473054
-2018,Indian,1.9038461538461535
-2018,Pacific,0.7085526315789474
-2018,Red Sea,0.125
-2019,Arabian Gulf,16.25
-2019,Atlantic,0.5251351351351351
-2019,Indian,5.382828947368421
-2019,Pacific,3.874049773755656
-2019,Red Sea,0.304054054054054
-2020,Indian,9.0
-2020,Pacific,3.702380952380953
-2020,Red Sea,0.375
+const csvData = `year,oceanName,averageBleaching
+1990,Red Sea,0.75
+1990,Pacific,11.10714286
+1990,Indian,9
+1991,Red Sea,2.25
+1991,Pacific,11.6485034
+1991,Indian,6.933813559
+1991,Atlantic,1.943
+1991,Arabian Gulf,32.5
+1992,Red Sea,1.25
+1992,Pacific,4.251315789
+1992,Indian,4.95
+1992,Atlantic,3.735714286
+1993,Pacific,8.098173516
+1993,Indian,4.472222222
+1993,Atlantic,6.84175
+1993,Arabian Gulf,4.375
+1994,Red Sea,10
+1994,Pacific,22.07106164
+1994,Indian,50.79480851
+1994,Atlantic,10.96220779
+1994,Arabian Gulf,2.666666667
+1995,Red Sea,0.75
+1995,Pacific,7.217008798
+1995,Indian,3.404347826
+1995,Atlantic,26.12688427
+1995,Arabian Gulf,0.25
+1996,Red Sea,3.833333333
+1996,Pacific,7.861827957
+1996,Indian,1.783333333
+1996,Atlantic,29.86577358
+1997,Pacific,10.06538976
+1997,Indian,1.354615385
+1997,Atlantic,6.613515152
+1997,Arabian Gulf,1.222222222
+1998,Red Sea,7.625
+1998,Pacific,3.764285714
+1998,Indian,1.708333333
+1998,Atlantic,6.278868613
+1998,Arabian Gulf,1.25
+1999,Pacific,5.650277778
+1999,Indian,0.919642857
+1999,Atlantic,14.58768997
+1999,Arabian Gulf,14.25
+2000,Red Sea,46.25
+2000,Pacific,18.67164021
+2000,Indian,37.22131579
+2000,Atlantic,10.35019178
+2000,Arabian Gulf,3.232727273
+2001,Red Sea,9.6875
+2001,Pacific,13.37719745
+2001,Indian,13.05851852
+2001,Atlantic,12.36900881
+2001,Arabian Gulf,4.226956522
+2002,Red Sea,2.314444444
+2002,Pacific,10.37375
+2002,Indian,3.006666667
+2002,Atlantic,7.683185379
+2003,Pacific,10.95127586
+2003,Indian,8.2102
+2003,Atlantic,11.11861905
+2003,Arabian Gulf,33.412
+2004,Red Sea,0.892857143
+2004,Pacific,5.979678363
+2004,Indian,6.205
+2004,Atlantic,22.08721925
+2004,Arabian Gulf,0.375
+2005,Red Sea,0.7
+2005,Pacific,4.413003802
+2005,Indian,14.17186207
+2005,Atlantic,35.7089828
+2006,Red Sea,0.375
+2006,Pacific,5.441716172
+2006,Indian,16.21411765
+2006,Atlantic,12.56477612
+2006,Arabian Gulf,1.833333333
+2007,Red Sea,0.25
+2007,Pacific,4.828663366
+2007,Indian,23.38095238
+2007,Atlantic,5.277514451
+2007,Arabian Gulf,0.9375
+2008,Pacific,32.4591828
+2008,Indian,27.48846154
+2008,Atlantic,4.732572614
+2008,Arabian Gulf,75
+2009,Pacific,29.18421053
+2009,Indian,27.71888889
+2009,Atlantic,2.109563492
+2010,Pacific,54.08823529
+2010,Indian,3.27
+2010,Atlantic,3.412857143
+2010,Arabian Gulf,60.16666667
+2011,Pacific,25.40909091
+2011,Indian,16.35714286
+2011,Atlantic,9.400247678
+2012,Red Sea,48.3
+2012,Pacific,44.55332765
+2012,Indian,50.69449612
+2012,Atlantic,32.09815951
+2012,Arabian Gulf,54.61111111
+2013,Pacific,35
+2013,Indian,46.125
+2013,Atlantic,57.2
+2014,Pacific,49.17928571
+2014,Arabian Gulf,78.53846154
+2015,Indian,75
+2015,Atlantic,31.66666667
+2016,Pacific,31.792
+2016,Atlantic,23.5
+2017,Pacific,54.375
+2017,Atlantic,11
+2018,Pacific,41.83333333
+2018,Atlantic,11
+2019,Pacific,66.9
+2019,Indian,75
+2019,Atlantic,7.75
+2020,Indian,75
+2020,Atlantic,5.5
 `;
 
 // Function to parse CSV
@@ -121,8 +141,8 @@ const DetailView = () => {
   useEffect(() => {
     parseCSV(csvData)
       .then((parsedData) => {
-        // Filter data for years between 2000 and 2020
-        const filteredData = parsedData.filter(item => item.year >= 2000 && item.year <= 2020);
+        // Filter data for years between 1990 and 2020
+        const filteredData = parsedData.filter(item => item.year >= 1990 && item.year <= 2020);
 
         const years = [...new Set(filteredData.map(item => item.year))];
         const oceanNames = [...new Set(filteredData.map(item => item.oceanName))];
@@ -132,7 +152,7 @@ const DetailView = () => {
           type: 'scatter',
           data: years.map(year => {
             const entry = filteredData.find(d => d.year === year && d.oceanName === ocean);
-            return entry ? [year, entry.cover] : [year, 0];
+            return entry ? [year, entry.averageBleaching] : [year, 0];
           }),
           symbolSize: 10,
         }));
@@ -149,12 +169,12 @@ const DetailView = () => {
           xAxis: {
             type: 'value',
             name: 'Year',
-            min: 2000,
+            min: 1990,
             max: 2020,
           },
           yAxis: {
             type: 'value',
-            name: 'Cover',
+            name: 'Average Bleaching',
           },
           series: series,
         });
@@ -177,7 +197,6 @@ const DetailView = () => {
   return (
     <div>
       <center><h2>Coral Bleaching Percent</h2></center>
-      
       <div ref={chartRef} style={{ width: '100%', height: '440px' }}></div>
     </div>
   );
